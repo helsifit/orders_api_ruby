@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require "hanami/middleware/body_parser"
+require_relative "app"
 
-use Hanami::Middleware::BodyParser, :json
-
-require_relative "orders_api"
-
-run OrdersApi.new
+run App.new

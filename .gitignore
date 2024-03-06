@@ -3,3 +3,4 @@
 .ruby-lsp
 .env
 .env.test
+.env.production

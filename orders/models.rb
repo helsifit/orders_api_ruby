@@ -10,6 +10,7 @@ end
 
 class Order < Sequel::Model
   CURRENCIES = %w[USD GBP AUD CAD EUR NZD].freeze
+  STRIPE = "stripe"
   plugin :uuid, field: :token
   one_to_many :line_items
 

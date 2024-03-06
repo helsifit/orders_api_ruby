@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe "Orders API", type: :request do
-  let(:app) { OrdersApi.new }
+RSpec.describe "App", type: :request do
+  let(:app) { App.new }
   let!(:product_variant) do
     ProductVariant.find_or_create(product_handle: "ab-roller", color: "blue") do |pv|
       pv.title = "Ab Roller, Blue"
@@ -17,30 +17,40 @@ RSpec.describe "Orders API", type: :request do
   let(:order) { Order.last }
 
   describe "create order" do
-    let(:params) do
+    let(:order_attributes) do
       {
-        order: {
-          currency: price.currency,
-          country_code: "GB",
-          first_name: Faker::Name.first_name,
-          last_name: Faker::Name.last_name,
-          address1: Faker::Address.street_address,
-          address2: Faker::Address.building_number,
-          city: Faker::Address.city,
-          zone: "",
-          postal_code: Faker::Address.postcode,
-          line_items: [{
-            product_handle: price.product_variant.product_handle,
-            size: "",
-            color: price.product_variant.color,
-            quantity: 1
-          }]
-        }
+        currency: price.currency,
+        country_code: "GB",
+        first_name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name,
+        address1: Faker::Address.street_address,
+        address2: Faker::Address.building_number,
+        city: Faker::Address.city,
+        zone: "",
+        postal_code: Faker::Address.postcode,
+        line_items: [{
+          product_handle: price.product_variant.product_handle,
+          size: "",
+          color: price.product_variant.color,
+          quantity: 1
+        }]
       }
     end
 
+    it "creates order without PSP", vcr: {cassette_name: "stripe/create_session"} do
+      post "/orders", {order: order_attributes}
+
+      expect(last_response).to be_ok
+      expect(JSON.parse(last_response.body)).to eq({
+        "id" => order.id,
+        "currency" => "GBP",
+        "total_amount" => 5499,
+        "paid" => false,
+        "line_items"=>[{"product_handle"=>"ab-roller", "quantity"=>1}]})
+    end
+
     it "creates order and redirects to Stripe session", vcr: {cassette_name: "stripe/create_session"} do
-      post "/orders", params
+      post "/orders", {order: order_attributes.merge(psp: "stripe")}
 
       expect(last_response).to be_redirect
       expect(last_response.headers["Location"]).to eq("https://checkout.stripe.com/c/pay/cs_test_a1q4FfXheTMfhhj0NzN0XxI9hcUOwGSQmcr2yfGGtlrlKuml0H90Fg44W2#fidqdXFsaGx2cWxmUmRpaWBxV2BrYWB3Jz9xd3BgKSdkdWxOYHwnPyd1blpxYHZxWjA0SmFzUENPdmdOczFBVUpIdV9ybUBTU0lJcjVJajZRaTdDY1xTYzdMQjU2Z3BuQmBvTkdzUUl%2FYTJHdjFGV2psYm9qcGJyf2xGVH9tSDB0fTZwNVx2STxSNTVVfzdOdU5%2FUCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl")

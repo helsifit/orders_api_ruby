@@ -16,12 +16,12 @@ FileUtils.chdir APP_ROOT do
 
   puts "\n== Copying sample files =="
   unless File.exist?(".env")
-    FileUtils.cp ".env.sample", ".env"
+    FileUtils.cp ".env.example", ".env"
   end
-  puts "Edit development setting in .env file"
+  puts "Edit development settings in .env file"
 
   unless File.exist?(".env.test")
-    FileUtils.cp ".env.test.sample", ".env.test"
+    FileUtils.cp ".env.test.example", ".env.test"
   end
   puts "Edit test DB name in .env.test file"
 end

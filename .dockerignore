@@ -1,0 +1,19 @@
+# See https://docs.docker.com/engine/reference/builder/#dockerignore-file for more about ignoring files.
+
+# Ignore git directory.
+/.git/
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore ruby-lsp
+/.ruby-lsp
+
+# Ignore development setup utils.
+/bin/setup.rb
+/script/sync_shop_admin_prices.rb
+/script/sync_stripe_products.rb
+
+# Ignore all environment files.
+/.env*
+!/.env.example

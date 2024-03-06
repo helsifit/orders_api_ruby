@@ -1,24 +1,9 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# bin/migrate_db.rb -h127.0.0.1 -ualex -dhelsifit_orders_dev
-# bin/migrate_db.rb -h127.0.0.1 -ualex -dhelsifit_orders_test
+require_relative "../orders/config"
 
-require "optparse"
-require "pg"
-require "sequel"
-
-OPTIONS = {adapter: "postgresql", database: "orders_dev"}
-OptionParser.new do |opts|
-  opts.banner = "Usage: ruby scripts/create_db.rb [OPTIONS]"
-  opts.on("-hHOST", "--host HOST", "Database host") { |host| OPTIONS[:host] = host }
-  opts.on("-uUSER", "--user USER", "Database username") { |user| OPTIONS[:user] = user }
-  opts.on("-pPASSWORD", "--password PASSWORD", "Database password") { |password| OPTIONS[:password] = password }
-  opts.on("-PPORT", "--port PORT", "Database port") { |port| OPTIONS[:port] = port }
-  opts.on("-dDATABASE", "--database DATABASE", "Database name") { |db_name| OPTIONS[:database] = db_name }
-end.parse!
-
-Sequel.connect(OPTIONS) do |db|
+Sequel.connect(DB_CONFIG) do |db|
   db.create_table? :product_variants do
     primary_key :id
     String :product_handle, index: true, null: false
