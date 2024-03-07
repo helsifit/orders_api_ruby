@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+# bundle exec ruby bin/migrate_db.rb
+# docker exec -it orders-container bin/migrate_db.rb
+
 require_relative "../orders/config"
 
 Sequel.connect(DB_CONFIG) do |db|

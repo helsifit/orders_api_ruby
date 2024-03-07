@@ -16,11 +16,12 @@ ENV RACK_ENV="production" \
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --system
+RUN bundle config set path.system true
+RUN bundle install
 
 # Copy application code
 COPY . .
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["bundle", "exec", "falcon", "serve", "-p", "3000"]
+CMD ["bundle", "exec", "puma", "-p", "3000"]
