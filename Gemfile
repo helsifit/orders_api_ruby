@@ -2,7 +2,7 @@ source "https://rubygems.org"
 ruby "3.3.0"
 
 gem "hanami-api", "~> 0.3.0"
-gem "puma"
+gem "puma", "~> 6.4.2"
 gem "stripe", "~> 10.6.0"
 gem "sequel", "~> 5.76.0"
 gem "pg", "~> 1.5.4"
