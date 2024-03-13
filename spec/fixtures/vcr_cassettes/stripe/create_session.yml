@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/checkout/sessions
     body:
       encoding: UTF-8
-      string: line_items[0][price]=price_1On5K4JsbKv4DPOMbytvJUjw&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2Flocalhost%3A3000%2Fsuccess%3Ft%3De00c70e8-4669-4663-abe3-c42ec112a6ed&cancel_url=http%3A%2F%2Flocalhost%3A3000%2Fcancel%3Ft%3De00c70e8-4669-4663-abe3-c42ec112a6ed
+      string: line_items[0][price_data][currency]=gbp&line_items[0][price_data][product_data][name]=HelsiFit%E2%84%A2+Ab+Roller+Wheel+Automatic+Rebound+With+Elbow+Support+%2F+Blue&line_items[0][price_data][unit_amount]=5499&line_items[0][quantity]=1&mode=payment&success_url=http%3A%2F%2Flocalhost%3A3000%2Forders%2Fsuccess%3Ft%3D9da453b4-893a-4476-ab53-3c6084d5757d&cancel_url=http%3A%2F%2Flocalhost%3A3000%2Forders%2Fcancel%3Ft%3D9da453b4-893a-4476-ab53-3c6084d5757d
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/10.6.0
@@ -17,8 +17,8 @@ http_interactions:
       - '2023-10-16'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"10.6.0","lang":"ruby","lang_version":"3.3.0 p0 (2023-12-25)","platform":"x86_64-darwin22","engine":"ruby","publisher":"stripe","uname":"Darwin
-        Oleks-MacBook-Pro.local 22.6.0 Darwin Kernel Version 22.6.0: Wed Jul  5
-        22:21:56 PDT 2023; root:xnu-8796.141.3~6/RELEASE_X86_64 x86_64","hostname":"Oleks-MacBook-Pro.local"}'
+        Oleksandrs-MBP.lan 22.6.0 Darwin Kernel Version 22.6.0: Wed Jul  5 22:21:56
+        PDT 2023; root:xnu-8796.141.3~6/RELEASE_X86_64 x86_64","hostname":"Oleksandrs-MBP.lan"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 25 Feb 2024 12:35:58 GMT
+      - Wed, 13 Mar 2024 18:07:19 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '2453'
+      - '2568'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -55,12 +55,14 @@ http_interactions:
       - report-uri https://q.stripe.com/csp-report?p=v1%2Fcheckout%2Fsessions; block-all-mixed-content;
         default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
         img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
+      Cross-Origin-Opener-Policy-Report-Only:
+      - same-origin; report-to=https://q.stripe.com/coop-report
       Idempotency-Key:
-      - 05f6c63b-a125-49cb-845a-a933809fe187
+      - eab51c12-45e0-4b2b-b1ee-aeda1c4c7149
       Original-Request:
-      - req_sH7dhbFdSzy7M8
+      - req_kg2GscxoKtxdzN
       Request-Id:
-      - req_sH7dhbFdSzy7M8
+      - req_kg2GscxoKtxdzN
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
@@ -75,7 +77,7 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "cs_test_a1q4FfXheTMfhhj0NzN0XxI9hcUOwGSQmcr2yfGGtlrlKuml0H90Fg44W2",
+          "id": "cs_test_a1E9YWKaKJ7mhjEyBEWZOlY02mU0LtU3zrEi593F0CVCZlS78nJyENO2qL",
           "object": "checkout.session",
           "after_expiration": null,
           "allow_promotion_codes": null,
@@ -87,12 +89,12 @@ http_interactions:
             "status": null
           },
           "billing_address_collection": null,
-          "cancel_url": "http://localhost:3000/cancel?t=e00c70e8-4669-4663-abe3-c42ec112a6ed",
+          "cancel_url": "http://localhost:3000/orders/cancel?t=9da453b4-893a-4476-ab53-3c6084d5757d",
           "client_reference_id": null,
           "client_secret": null,
           "consent": null,
           "consent_collection": null,
-          "created": 1708864558,
+          "created": 1710353239,
           "currency": "gbp",
           "currency_conversion": null,
           "custom_fields": [],
@@ -106,7 +108,7 @@ http_interactions:
           "customer_creation": "if_required",
           "customer_details": null,
           "customer_email": null,
-          "expires_at": 1708950958,
+          "expires_at": 1710439639,
           "invoice": null,
           "invoice_creation": {
             "enabled": false,
@@ -127,10 +129,18 @@ http_interactions:
           "payment_intent": null,
           "payment_link": null,
           "payment_method_collection": "if_required",
-          "payment_method_configuration_details": null,
-          "payment_method_options": {},
+          "payment_method_configuration_details": {
+            "id": "pmc_1OnmZXJsbKv4DPOMht2RL19E",
+            "parent": null
+          },
+          "payment_method_options": {
+            "card": {
+              "request_three_d_secure": "automatic"
+            }
+          },
           "payment_method_types": [
-            "card"
+            "card",
+            "link"
           ],
           "payment_status": "unpaid",
           "phone_number_collection": {
@@ -145,14 +155,14 @@ http_interactions:
           "status": "open",
           "submit_type": null,
           "subscription": null,
-          "success_url": "http://localhost:3000/success?t=e00c70e8-4669-4663-abe3-c42ec112a6ed",
+          "success_url": "http://localhost:3000/orders/success?t=9da453b4-893a-4476-ab53-3c6084d5757d",
           "total_details": {
             "amount_discount": 0,
             "amount_shipping": 0,
             "amount_tax": 0
           },
           "ui_mode": "hosted",
-          "url": "https://checkout.stripe.com/c/pay/cs_test_a1q4FfXheTMfhhj0NzN0XxI9hcUOwGSQmcr2yfGGtlrlKuml0H90Fg44W2#fidqdXFsaGx2cWxmUmRpaWBxV2BrYWB3Jz9xd3BgKSdkdWxOYHwnPyd1blpxYHZxWjA0SmFzUENPdmdOczFBVUpIdV9ybUBTU0lJcjVJajZRaTdDY1xTYzdMQjU2Z3BuQmBvTkdzUUl%2FYTJHdjFGV2psYm9qcGJyf2xGVH9tSDB0fTZwNVx2STxSNTVVfzdOdU5%2FUCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
+          "url": "https://checkout.stripe.com/c/pay/cs_test_a1E9YWKaKJ7mhjEyBEWZOlY02mU0LtU3zrEi593F0CVCZlS78nJyENO2qL#fidkdWxOYHwnPyd1blpxYHZxWjA0SmFzUENPdmdOczFBVUpIdV9ybUBTU0lJcjVJajZRaTdDY1xTYzdMQjU2Z3BuQmBvTkdzUUl%2FYTJHdjFGV2psYm9qcGJyf2xGVH9tSDB0fTZwNVx2STxSNTVVfzdOdU5%2FUCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
         }
-  recorded_at: Sun, 25 Feb 2024 12:35:58 GMT
+  recorded_at: Wed, 13 Mar 2024 18:07:19 GMT
 recorded_with: VCR 6.2.0

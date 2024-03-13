@@ -1,11 +1,10 @@
-# frozen_string_literal: true
-
 ENV["RACK_ENV"] = "test"
 require "dotenv"
 Dotenv.load(".env.test", overwrite: true)
 require_relative "../app"
 require "rack/test"
 require "webmock/rspec"
+require "pry"
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods

@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
-# frozen_string_literal: true
 
-# bundle exec ruby bin/create_db.rb
-# docker exec -it orders-container bin/create_db.rb
+# bundle exec bin/db_create
+# DB_DATABASE=helsifit_orders_test bin/db_create
+# docker exec -it orders-container bin/db_create
 
 begin
   require_relative "../orders/config"

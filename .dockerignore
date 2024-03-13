@@ -10,9 +10,9 @@
 /.ruby-lsp
 
 # Ignore development setup utils.
-/bin/setup.rb
-/script/sync_shop_admin_prices.rb
-/script/sync_stripe_products.rb
+/bin/setup
+/bin/db_restore.sh
+/bin/write_product_variants
 
 # Ignore all environment files.
 /.env*

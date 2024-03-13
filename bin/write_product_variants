@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+require "yaml"
+
+File.open("orders/product_variants.rb", 'w') do |file|
+  file.write("PRODUCT_VARIANTS = #{YAML.load_file("shop/product_variants.yml")}.freeze\n")
+end

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 ENV["RACK_ENV"] ||= "development"
 
 Pry.config.hooks.add_hook(:when_started, :load_app) do

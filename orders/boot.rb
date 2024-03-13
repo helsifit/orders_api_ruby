@@ -1,5 +1,6 @@
-# frozen_string_literal: true
-
 require_relative "config"
-require_relative "models"
-require_relative "services"
+require_relative "product_variants"
+require_relative "order"
+require_relative "line_item"
+require_relative "order_creator"
+require_relative "stripe_session"

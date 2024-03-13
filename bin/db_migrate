@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+
+# bundle exec bin/db_migrate
+# DB_DATABASE=helsifit_orders_test bundle exec bin/db_migrate
+# docker exec -it orders-container bin/db_migrate
+
+require_relative "../orders/config"
+
+Sequel.connect(DB_CONFIG) do |db|
+  db.create_table? :orders do
+    primary_key :id
+    uuid :token, null: false, index: true
+    String :psp, null: false
+    String :country_code, null: false
+    String :email
+    String :first_name, null: false
+    String :last_name, null: false
+    String :address1, null: false
+    String :address2
+    String :city, null: false
+    String :zone
+    String :postal_code, null: false
+    String :currency, null: false, limit: 7
+    Integer :total_amount
+    Boolean :paid, default: false, null: false
+    Boolean :canceled, default: false, null: false
+    String :stripe_session_id
+    DateTime :created_at, default: Sequel::CURRENT_TIMESTAMP, null: false
+    DateTime :updated_at, default: Sequel::CURRENT_TIMESTAMP, null: false
+  end
+
+  db.create_table? :line_items do
+    primary_key :id
+    foreign_key :order_id, :orders, index: true, null: false, on_delete: :restrict
+    String :product_variant_key, null: false
+    Integer :unit_amount, null: false
+    Integer :quantity, null: false
+  end
+end

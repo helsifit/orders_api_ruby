@@ -36,8 +36,8 @@ docker logs orders-container
 ## Exec in contaner
 
 ~~~sh
-docker exec -it orders-container bin/create_db.rb
-docker exec -it orders-container bin/migrate_db.rb
+docker exec -it orders-container bin/db_create
+docker exec -it orders-container bin/db_migrate
 docker exec -it orders-container pry
 docker exec -it orders-container /bin/sh
 ~~~
