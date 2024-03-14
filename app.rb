@@ -17,6 +17,7 @@ class App < Hanami::API
       session = StripeSession.create(order, line_items)
       redirect session.url, 303
     else
+      status(201)
       json({id: order.id, country_code: order.country_code, currency: order.currency, total_amount: order.total_amount,
         line_items: order.line_items.map { |li| {product_variant_key: li.product_variant_key, unit_amount: li.unit_amount, quantity: li.quantity} }})
     end

@@ -13,6 +13,7 @@
 /bin/setup
 /bin/db_restore.sh
 /bin/write_product_variants
+/shop/product_variants.yml
 
 # Ignore all environment files.
 /.env*

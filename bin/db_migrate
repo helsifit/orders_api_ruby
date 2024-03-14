@@ -9,7 +9,7 @@ require_relative "../orders/config"
 Sequel.connect(DB_CONFIG) do |db|
   db.create_table? :orders do
     primary_key :id
-    uuid :token, null: false, index: true
+    uuid :token, null: false, index: {unique: true}
     String :psp, null: false
     String :country_code, null: false
     String :email
@@ -34,6 +34,6 @@ Sequel.connect(DB_CONFIG) do |db|
     foreign_key :order_id, :orders, index: true, null: false, on_delete: :restrict
     String :product_variant_key, null: false
     Integer :unit_amount, null: false
-    Integer :quantity, null: false
+    Integer :quantity, default: 1, null: false
   end
 end

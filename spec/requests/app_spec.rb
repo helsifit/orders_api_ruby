@@ -26,7 +26,7 @@ RSpec.describe "App", type: :request do
     it "creates order with dummy PSP" do
       post "/orders", order: order_attributes
 
-      expect(last_response).to be_ok
+      expect(last_response).to be_created
       expect(JSON.parse(last_response.body)).to eq({
         "id" => order.id,
         "country_code" => "GB",
