@@ -13,7 +13,8 @@ module OrderCreator
       unit_amount = product_variant.fetch(currency)
       LineItem.create(order:, product_variant_key:, unit_amount:, quantity:)
     end
-    order.update(total_amount: line_items.map(&:subtotal_amount).sum)
+    order.update(total_amount: line_items.sum(&:subtotal_amount))
+    # TODO: Validate order data
     [order, line_items]
   end
 

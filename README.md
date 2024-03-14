@@ -47,7 +47,7 @@ Create Order with JSON data:
 ~~~sh
 curl -i -X POST http://localhost:3000/orders \
     -H "Content-Type: application/json" \
-    -d '{"order": {"psp": "debug", "email": "herbert.conroy@email.com", "currency": "GBP", "country_code": "GB", "first_name": "Herbert", "last_name": "Conroy", "address1": "930 Kiehn Walks", "address2": "44216", "city": "Lake Terrance", "postal_code": "67570-3035", "line_items": [{"product_variant": "ab-roller/blue", "quantity": 1}]}}'
+    -d '{"order": {"psp": "debug", "country_code": "GB", "currency": "GBP", "email": "herbert.conroy@email.com", "first_name": "Herbert", "last_name": "Conroy", "address1": "930 Kiehn Walks", "address2": "44216", "city": "Lake Terrance", "postal_code": "67570-3035", "line_items": [{"product_variant": "ab-roller/blue", "quantity": 1}]}}'
 ~~~
 
 Create Order with form-urlencoded data:
@@ -55,9 +55,9 @@ Create Order with form-urlencoded data:
 ~~~sh
 curl -i -X POST http://localhost:3000/orders \
    -H "Content-Type: application/x-www-form-urlencoded" \
-   -d "order[psp]=debug&order[email]=herbert.conroy@email.com&order[currency]=GBP&order[country_code]=GB&order[first_name]=Herbert&order[last_name]=Conroy&order[address1]=930 Kiehn Walks&order[address2]=44216&order[city]=Lake Terrance&order[postal_code]=67570-3035&order[line_items][][product_handle]=ab-roller/blue&order[line_items][][quantity]=1"
+   -d "order[psp]=debug&order[country_code]=GB&order[currency]=GBP&order[email]=herbert.conroy@email.com&order[first_name]=Herbert&order[last_name]=Conroy&order[address1]=930 Kiehn Walks&order[address2]=44216&order[city]=Lake Terrance&order[postal_code]=67570-3035&order[line_items][][product_handle]=ab-roller/blue&order[line_items][][quantity]=1"
 ~~~
 
 ### Stripe Payment Service Provider
 
-Creating order with `psp=stripe` redirects to Stripe, Stripe requests callback orders API URL and orders API redirects to frontend /success.html page.
+Creating order with `psp=stripe` redirects to Stripe. After a successful payment, Stripe calls the Orders API /orders/success callback and that redirects to the /success.html frontend page.

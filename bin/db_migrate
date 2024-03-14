@@ -6,23 +6,25 @@
 
 require_relative "../orders/config"
 
+puts "Migrating database #{DB_CONFIG[:database]} ..."
+
 Sequel.connect(DB_CONFIG) do |db|
   db.create_table? :orders do
     primary_key :id
-    String :psp, null: false
-    String :country_code, null: false
-    String :currency, null: false, limit: 7
-    Integer :total_amount
+    String :psp, default: "deferred", null: false
+    String :country_code, default: "", null: false
+    String :currency, default: "", null: false, limit: 7
+    Integer :total_amount, default: 0, null: false
     Boolean :paid, default: false, null: false
     Boolean :canceled, default: false, null: false
     String :email
-    String :first_name, null: false
-    String :last_name, null: false
-    String :address1, null: false
+    String :first_name, default: "", null: false
+    String :last_name, default: "", null: false
+    String :address1, default: "", null: false
     String :address2
-    String :city, null: false
+    String :city, default: "", null: false
     String :zone
-    String :postal_code, null: false
+    String :postal_code, default: "", null: false
     uuid :token, null: false, index: {unique: true}
     String :stripe_session_id
     DateTime :created_at, default: Sequel::CURRENT_TIMESTAMP, null: false
@@ -32,8 +34,8 @@ Sequel.connect(DB_CONFIG) do |db|
   db.create_table? :line_items do
     primary_key :id
     foreign_key :order_id, :orders, index: true, null: false, on_delete: :restrict
-    String :product_variant_key, null: false
-    Integer :unit_amount, null: false
+    String :product_variant_key, default: "unset", null: false
+    Integer :unit_amount, default: 0, null: false
     Integer :quantity, default: 1, null: false
   end
 end
