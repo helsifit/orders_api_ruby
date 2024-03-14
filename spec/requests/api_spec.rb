@@ -50,14 +50,14 @@ RSpec.describe "Api", type: :request do
         post "/orders", order: order_attributes.merge(currency: "EEE")
 
         expect(last_response).to be_redirect
-        expect(last_response.headers["Location"]).to eq("http://localhost:9000/error.html?error=currency+cannot+be+used+at+this+moment")
+        expect(last_response.headers["Location"]).to eq("http://localhost:9000/error.html?error=Sorry%2C+we+cannot+process+the+order%3A+Currency+cannot+be+used+at+this+moment.")
       end
 
       it "redirects with error when invalid product_variant" do
         post "/orders", order: order_attributes.merge(line_items: [{product_variant: "sombrero", quantity: 1}])
 
         expect(last_response).to be_redirect
-        expect(last_response.headers["Location"]).to eq("http://localhost:9000/error.html?error=Unexpected+error")
+        expect(last_response.headers["Location"]).to eq("http://localhost:9000/error.html?error=Sorry%2C+we+cannot+process+the+order%3A+Product+variant+is+unknown.")
       end
     end
   end

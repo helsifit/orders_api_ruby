@@ -11,8 +11,7 @@ class Api < Hanami::API
   end
 
   post "/orders" do
-    order, line_items = OrderCreator.call(params[:order])
-    payment_session_url = PaymentInitiator.call(order, line_items)
+    payment_session_url = OrderProcessor.call(params[:order])
 
     redirect payment_session_url, 303
   rescue => exception

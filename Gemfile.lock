@@ -12,7 +12,7 @@ GEM
       bigdecimal
       rexml
     diff-lcs (1.5.0)
-    dotenv (3.0.2)
+    dotenv (3.0.3)
     faker (3.2.3)
       i18n (>= 1.8.11, < 2)
     faraday (2.9.0)
@@ -121,7 +121,7 @@ PLATFORMS
 
 DEPENDENCIES
   base64 (~> 0.2.0)
-  dotenv (~> 3.0.2)
+  dotenv (~> 3.0.3)
   faker (~> 3.2.3)
   faraday (~> 2.9.0)
   hanami-api (~> 0.3.0)

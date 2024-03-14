@@ -7,7 +7,7 @@ gem "stripe", "~> 10.6.0"
 gem "sequel", "~> 5.76.0"
 gem "pg", "~> 1.5.4"
 gem "pry", "~> 0.14.2", require: false
-gem "dotenv", "~> 3.0.2", group: [:development, :test], require: "dotenv/load"
+gem "dotenv", "~> 3.0.3", group: [:development, :test], require: "dotenv/load"
 gem "base64", "~> 0.2.0"
 gem "json", "~> 2.7.1"
 gem "oj", "~> 3.16.3"
