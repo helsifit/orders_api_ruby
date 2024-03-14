@@ -3,6 +3,11 @@ class Order < Sequel::Model
   STRIPE = "stripe"
   plugin :uuid, field: :token
   one_to_many :line_items
+  dataset_module do
+    def pending
+      where(paid: false, canceled: false)
+    end
+  end
 
   def validate
     super
@@ -16,5 +21,13 @@ class Order < Sequel::Model
     errors.add(:city, "cannot be empty") if !city || city.empty?
     errors.add(:zone, "cannot be empty") if country_code == "US" && (!zone || zone.empty?)
     errors.add(:postal_code, "cannot be empty") if !postal_code || postal_code.empty?
+  end
+
+  def mark_paid!
+    update(paid: true, updated_at: Time.now.utc)
+  end
+
+  def mark_canceled!
+    update(canceled: true, updated_at: Time.now.utc)
   end
 end

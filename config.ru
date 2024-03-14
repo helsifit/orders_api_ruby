@@ -1,3 +1,3 @@
-require_relative "app"
+require_relative "orders/api"
 
-run App.new
+run Api.new

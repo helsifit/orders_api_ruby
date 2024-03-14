@@ -9,9 +9,12 @@ require_relative "../orders/config"
 Sequel.connect(DB_CONFIG) do |db|
   db.create_table? :orders do
     primary_key :id
-    uuid :token, null: false, index: {unique: true}
     String :psp, null: false
     String :country_code, null: false
+    String :currency, null: false, limit: 7
+    Integer :total_amount
+    Boolean :paid, default: false, null: false
+    Boolean :canceled, default: false, null: false
     String :email
     String :first_name, null: false
     String :last_name, null: false
@@ -20,10 +23,7 @@ Sequel.connect(DB_CONFIG) do |db|
     String :city, null: false
     String :zone
     String :postal_code, null: false
-    String :currency, null: false, limit: 7
-    Integer :total_amount
-    Boolean :paid, default: false, null: false
-    Boolean :canceled, default: false, null: false
+    uuid :token, null: false, index: {unique: true}
     String :stripe_session_id
     DateTime :created_at, default: Sequel::CURRENT_TIMESTAMP, null: false
     DateTime :updated_at, default: Sequel::CURRENT_TIMESTAMP, null: false

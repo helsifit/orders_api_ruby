@@ -1,7 +1,7 @@
 ENV["RACK_ENV"] = "test"
 require "dotenv"
 Dotenv.load(".env.test", overwrite: true)
-require_relative "../app"
+require_relative "../orders/api"
 require "rack/test"
 require "webmock/rspec"
 require "pry"
