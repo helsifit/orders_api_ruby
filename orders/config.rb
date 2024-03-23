@@ -9,8 +9,8 @@ DB_CONFIG = {
   host: ENV.fetch("DB_HOST", "127.0.0.1"),
   port: ENV.fetch("DB_PORT", "5432"),
   pool: ENV.fetch("DB_POOL", "5"),
-  username: ENV.fetch("DB_USERNAME", "alex"),
-  password: ENV.fetch("DB_PASSWORD", ""),
+  username: ENV.fetch("DB_USERNAME", "postgres"),
+  password: ENV.fetch("DB_PASSWORD", "postgres"),
   database: ENV.fetch("DB_DATABASE", "helsifit_orders_dev")
 }.freeze
 Sequel::Model.db = DB = Sequel.connect(DB_CONFIG)

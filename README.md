@@ -40,7 +40,7 @@ Start development server:
 bundle exec rackup -p 3000
 ~~~
 
-## [API](/API.md)
+## [API](/doc/API.md)
 
 Create Order with JSON data:
 
